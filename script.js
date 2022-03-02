@@ -87,27 +87,27 @@ const displayphoneDetail = phone => {
     div.classList.add('card');
 
     div.innerHTML = `
-    <div class="row p-3 pb-5 ">
+    <div class="row p-3 pb-5 d-flex">
     <div class=" col-12 col-md-7 g-3 mx-auto"><img src="${phone.image}" class="card-img-top" alt="..."></div>
     
-    <div class="col-12 card-body col-md-5 ">
-        <h4 class="card-title">${phone.name}</h4>
-        <p class="card-text text-primary">${phone.releaseDate}</p>
-        <p class="card-text "><span class='fw-bold text-primary'>Special Sensors:<span><br> ${phone.mainFeatures.sensors}</p>
+    <div class="col-12 card-body col-md-5 align-items-center mt-5 pt-5 ">
+        <h4 class="card-title fw-bolder">${phone.name}</h4>
         
-        <p class="card-text fw-bold">${phone.mainFeatures.chipSet}[chip-set]</p>
-        <ul class:"fw-bold"><span class="text-info">Others Info</span>
+        <p class="card-text " ><span class='fw-bold text-primary'>Special Sensors:</span><br></p>
+        <h5> ${phone.mainFeatures.sensors}</h5><br>
+        
+        <p class="card-text fw-bold">${phone.mainFeatures.chipSet}[<span class="text-primary">chip-set</span>]</p><br>
+        <div class="text-info fw-bold">Others Info
+        <ul >
             <li>WLAN:${phone.others.WLAN}</li>
             <li>Bluetooth:${phone.others.Bluetooth}</li>
             <li>GPS:${phone.others.GPS}</li>
             <li>NFC:${phone.others.NFC}</li>
             <li>Radio:${phone.others.Radio}</li>
-            <li>USB:${phone.others.USB}</li>
-            
-            
+            <li>USB:${phone.others.USB}</li>    
         </ul>
-        
-        
+        </div>
+        <p class="card-text text-primary fw-bolder">${phone.releaseDate}</p>
     </div></div>
     `;
 
