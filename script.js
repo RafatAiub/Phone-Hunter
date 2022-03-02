@@ -26,6 +26,8 @@ const displayError = error => {
     document.getElementById(error).style.display = 'block';
 }
 
+
+
 const displayphones = phones => {
     // initailly display none 
     document.getElementById('not-found').style.display = 'none';
@@ -40,10 +42,10 @@ const displayphones = phones => {
         const notFound = document.getElementById('not-found');
         notFound.style.display = 'block';
     }
-
+    //take an empty array
+    const arr = [];
     phones.forEach(phone => {
-
-        // console.log(phone);
+        arr.push(phones.phone);
 
         const div = document.createElement('div');
         div.classList.add('col');
@@ -63,10 +65,21 @@ const displayphones = phones => {
             </div>
         </div>
             `;
-        searchResult.appendChild(div);
+        //only 20 mobile phone is showing 
+
+        const insert = () => searchResult.append(div);
+
+        if (arr.length < 21) {
+            insert();
+
+        }
 
     })
+
 }
+
+
+
 
 // async await concept
 const loadphoneDetail = slug => {

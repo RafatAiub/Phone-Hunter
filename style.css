@@ -1,11 +1,13 @@
 body{
+    background-color: black;
+
     font-family: 'EB Garamond', serif;
 
     font-family: 'Licorice', cursive;
 
     font-family: 'Poppins', sans-serif;
 }
-
+ /* these are two messages of blank or non-match case  */
 #not-found{
     display: none;
 }
