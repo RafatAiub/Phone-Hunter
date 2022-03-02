@@ -34,6 +34,7 @@ const displayphones = phones => {
     console.log(phones.length);
     if (phones.length == 0) {
         //show no result found 
+
         const notFound = document.getElementById('not-found');
         notFound.style.display = 'block';
     }
@@ -84,18 +85,32 @@ const displayphoneDetail = phone => {
     phoneDetails.textContent = '';
     const div = document.createElement('div');
     div.classList.add('card');
+
     div.innerHTML = `
     <div class="row p-3 pb-5 ">
     <div class=" col-12 col-md-7 g-3 mx-auto"><img src="${phone.image}" class="card-img-top" alt="..."></div>
     
-    <div class="col-12 card-body col-md-5">
+    <div class="col-12 card-body col-md-5 ">
         <h4 class="card-title">${phone.name}</h4>
         <p class="card-text text-primary">${phone.releaseDate}</p>
-        <p class="card-text">${phone.mainFeatures.chipSet}[chip-set]</p>
+        <p class="card-text "><span class='fw-bold text-primary'>Special Sensors:<span><br> ${phone.mainFeatures.sensors}</p>
+        
+        <p class="card-text fw-bold">${phone.mainFeatures.chipSet}[chip-set]</p>
+        <ul class:"fw-bold"><span class="text-info">Others Info</span>
+            <li>WLAN:${phone.others.WLAN}</li>
+            <li>Bluetooth:${phone.others.Bluetooth}</li>
+            <li>GPS:${phone.others.GPS}</li>
+            <li>NFC:${phone.others.NFC}</li>
+            <li>Radio:${phone.others.Radio}</li>
+            <li>USB:${phone.others.USB}</li>
+            
+            
+        </ul>
         
         
     </div></div>
     `;
+
     phoneDetails.appendChild(div);
 }
 // const youtube =()=>{
