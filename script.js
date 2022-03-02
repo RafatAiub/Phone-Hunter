@@ -1,24 +1,26 @@
-document.getElementById('error').style.display = 'none';
+document.getElementById('error').style.display = 'none';//for error message
 
 const search = () => {
-
 
     const searchField = document.getElementById('search-field');
     const searchText = (searchField.value);
     if (searchText == '') {
-        document.getElementById('not-found').style.display = 'none';
         //show message
-        document.getElementById('blank').style.display = 'block';
+        // document.getElementById('blank').style.display = 'block';
+        document.getElementById('not-found').style.display = 'block';
     }
     // clear data 
     searchField.value = "";
-    // document.getElementById('error').style.display = 'none';
+    document.getElementById('error').style.display = 'none';
     //load data
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
     fetch(url)
         .then(res => res.json())
         .then(data => displayphones(data.data))
         .catch(error => displayError(error));
+    // remove previous sesarch data 
+    const phoneDetails = document.getElementById('phone-details');
+    phoneDetails.textContent = '';
 }
 const displayError = error => {
     document.getElementById(error).style.display = 'block';
@@ -52,11 +54,13 @@ const displayphones = phones => {
         <div  class="card p-3">
             
             <img src="${phone.image}" class="card-img-top" alt="...">
+            <div class="d-flex">
             <div class="card-body">
-                <h5 class="card-title">${phone.phone_name}</h5>
-                <h6 class="card-text">${phone.brand}</h6>
+                <h3 class="card-title fw-bolder">${phone.phone_name}</h3>
+                <h4 class="card-text">${phone.brand}</h4>
             </div>
-            <button class="btn-outline-info" onclick="loadphoneDetail('${phone.slug}')">Details</button>
+            <a  href="#header" class="align-right mt-5 me-2 "><button   class="btn-outline-info fw-bolder p-2" onclick="loadphoneDetail('${phone.slug}')">Details</button></a>
+            </div>
         </div>
             `;
         searchResult.appendChild(div);
@@ -85,19 +89,24 @@ const displayphoneDetail = phone => {
     phoneDetails.textContent = '';
     const div = document.createElement('div');
     div.classList.add('card');
-
+    let releaseMessage = '';
+    if (phone.releaseDate == '') {
+        releaseMessage = 'Not released Yet!!!'
+    } else {
+        releaseMessage = '';
+    }
     div.innerHTML = `
     <div class="row p-3 pb-5 d-flex">
     <div class=" col-12 col-md-7 g-3 mx-auto"><img src="${phone.image}" class="card-img-top" alt="..."></div>
     
     <div class="col-12 card-body col-md-5 align-items-center mt-5 pt-5 ">
-        <h4 class="card-title fw-bolder">${phone.name}</h4>
+        <h2 class="card-title fw-bolder">${phone.name}</h2>
         
         <p class="card-text " ><span class='fw-bold text-primary'>Special Sensors:</span><br></p>
         <h5> ${phone.mainFeatures.sensors}</h5><br>
         
         <p class="card-text fw-bold">${phone.mainFeatures.chipSet}[<span class="text-primary">chip-set</span>]</p><br>
-        <div class="text-info fw-bold">Others Info
+        <div class="text-gray fw-bold">Others Info
         <ul >
             <li>WLAN:${phone.others.WLAN}</li>
             <li>Bluetooth:${phone.others.Bluetooth}</li>
@@ -108,11 +117,10 @@ const displayphoneDetail = phone => {
         </ul>
         </div>
         <p class="card-text text-primary fw-bolder">${phone.releaseDate}</p>
+        <h5 id="release class="text-info">${releaseMessage}</h5>
     </div></div>
     `;
 
+
     phoneDetails.appendChild(div);
 }
-// const youtube =()=>{
-//     fetch()
-// }
